@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'EZ Fthora';
+    src: url('fonts/EZFthora.woff2') format('woff2'),
+        url('fonts/EZFthora.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'EZ Omega';
+    src: url('fonts/EZOmega.woff2') format('woff2'),
+        url('fonts/EZOmega.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'EZ Oxeia';
+    src: url('fonts/EZOxeia.woff2') format('woff2'),
+        url('fonts/EZOxeia.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'EZ Psaltica';
+    src: url('fonts/EZPsaltica.woff2') format('woff2'),
+        url('fonts/EZPsaltica.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'EZ Special-I';
+    src: url('fonts/EZSpecial-I.woff2') format('woff2'),
+        url('fonts/EZSpecial-I.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'EZ Special-II';
+    src: url('fonts/EZSpecial-II.woff2') format('woff2'),
+        url('fonts/EZSpecial-II.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

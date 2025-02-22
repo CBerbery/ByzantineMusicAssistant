@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preload" href="fonts.css" as="style">
+    <script src="script.js" async></script>
+    <title>Byzantine Music Assistant</title>
+    <meta name="description" content="Helping tool for byzantine music students and experienced chanters">
+    <meta name="keywords" content="HTML5, Synthesizer, Byzantine Music, Scales, Fthora, 72-TET, micro-tuning, microtonal, Charles Berbery.">
+    <meta name="author" content="Charles Berbery">
+    <meta name="copyright" content="© 2021 Charles Berbery">
+
+</head>
+<body>
+    <div id="titleWrapper">
+        <div class = "mainTitle notSelectable">Byzantine Music Assistant</div>
+    </div>
+    <header>
+        <fieldset id = "scaleInfo" class = "notSelectable">
+            <legend>Scale Settings</legend>
+            <div>Scale <span class="show" id="scaleSpan">Diatonic</span></div>
+            <div>Fthora <span class="show" id="fthoraSpan">Ni</span></div>
+            <div>Base Note <span class="show" id="baseNoteSpan">Ni</span></div>
+        </fieldset>    
+        <fieldset id = "fineTune">
+            <legend> Fine tune base note </legend>
+            <input type="radio" id="option1" name="fineTuneBase" value="flat">
+            <label for="option1">Flat (&#9837;)</label><br>
+            <input type="radio" id="option2" name="fineTuneBase" value="diatonic">
+            <label for="option2">Diatonic</label><br>
+            <input type="radio" id="option3" name="fineTuneBase" value="natural" checked>
+            <label for="option3">Natural (&#9838;)</label>
+        </fieldset>
+        <div class = 'spacer'></div>
+        <img id = 'shiftKey' class = "alterationImage notSelectable" src = "images/ShiftKey.png" alt="Shift Key" width="70" height="70">
+        <img id = 'altKey' class = "alterationImage notSelectable" src = "images/AltKey.png" alt="Alt Key" width="70" height="70">
+        <img id = 'ctrlKey' class = "alterationImage notSelectable" src = "images/CtrlKey.png" alt="Ctrl Key" width="70" height="70">
+        <div class = 'spacer'></div>
+        <div class = "wrapper">
+            <label for="transpose">Transpose</label><br>    
+            <input id = "transposeInput" type = "number" min="-12" max="12" step="1" value="0" required>
+        </div>
+        <button id = "resetBtn" onclick="resetScale()" type="button"> Reset Scale </button>
+        
+    </header>
+    <div class= "main-section">
+        <div class="grid-item intervals">
+            <span class="interval interval-filler"></span>
+            <input class = "interval" type="number" min="0" max="72" step="1" value="12">
+            <input class = "interval" type="number" min="0" max="72" step="1" value="12">
+            <input class = "interval" type="number" min="0" max="72" step="1" value="10">
+            <input class = "interval" type="number" min="0" max="72" step="1" value="8">
+            <input class = "interval" type="number" min="0" max="72" step="1" value="12">
+            <input class = "interval" type="number" min="0" max="72" step="1" value="10">
+            <input class = "interval" type="number" min="0" max="72" step="1" value="8">
+            <input class = "interval" type="number" min="0" max="72" step="1" value="12">
+            <input class = "interval" type="number" min="0" max="72" step="1" value="12">
+            <input class = "interval" type="number" min="0" max="72" step="1" value="10">
+            <input class = "interval" type="number" min="0" max="72" step="1" value="8">
+            <input class = "interval" type="number" min="0" max="72" step="1" value="12">
+            <input class = "interval" type="number" min="0" max="72" step="1" value="10">
+            <input class = "interval" type="number" min="0" max="72" step="1" value="8">
+            <input class = "interval" type="number" min="0" max="72" step="1" value="12">
+            <input class = "interval" type="number" min="0" max="72" step="1" value="12">
+            <span class="interval interval-filler"></span>
+        </div>
+        <div class="grid-item playKeys">
+            <div id = "Gha-1" class="noteKey">
+                <div class = "notSelectable">
+                    Gha<span class= "underscore">-1</span>
+                    <div class = "transposedNoteName">Gha</div>
+                </div>
+                <div class = "martyria notSelectable">
+                    <div class = "variable lowOctave">N</div>
+                    <div class = "fixed">n</div>
+                </div>
+                <div class = "notSelectable"><hr><div class = "shortcutLetter">z</div></div>
+            </div>
+            <div id = "Dhi-1" class="noteKey">
+                <div class = "notSelectable">
+                    Dhi<span class= "underscore">-1</span>
+                    <div class = "transposedNoteName">Dhi</div>
+                </div>
+                <div class = "martyria notSelectable">
+                    <div class = "variable lowOctave">C</div>
+                    <div class = "fixed">m</div>
+                </div>
+                <div class = "notSelectable"><hr><div class = "shortcutLetter">x</div></div>
+            </div>
+            <div id = "Ke-1" class="noteKey">
+                <div class = "notSelectable">
+                    Ke<span class= "underscore">-1</span>
+                    <div class = "transposedNoteName">Ke</div>
+                </div>
+                <div class = "martyria notSelectable">
+                    <div class = "variable lowOctave">V</div>
+                    <div class = "fixed">,</div>
+                </div>
+                <div class = "notSelectable"><hr><div class = "shortcutLetter">a</div></div>
+            </div>
+            <div id= "Zo" class="noteKey">
+                <div class = "notSelectable">
+                    Zo
+                    <div class = "transposedNoteName">Zo</div>
+                </div>
+                <div class = "martyria notSelectable">
+                    <div class = "fixed">.<span class = "variable">&#62;</span></div>
+                </div>
+                <div class = "notSelectable"><hr><div class = "shortcutLetter">s</div></div>
+            </div>
+            <div id="Ni" class="noteKey">
+                <div class = "notSelectable">
+                    Ni
+                    <div class = "transposedNoteName">Ni</div>
+                </div>
+                <div class = "martyria notSelectable">
+                    <div class = "fixed">c<span class = "variable">C</span></div>
+                </div>
+                <div class = "notSelectable"><hr><div class = "shortcutLetter">d</div></div>
+            </div>
+            <div id="Pa" class="noteKey">
+                <div class = "notSelectable">
+                    Pa
+                    <div class = "transposedNoteName">Pa</div>
+                </div>
+                <div class = "martyria notSelectable">
+                    <div class = "fixed">v<span class = "variable">V</span></div>
+                </div>
+                <div class = "notSelectable"><hr><div class = "shortcutLetter">f</div></div>
+            </div>
+            <div id="Vou" class="noteKey">
+                <div class = "notSelectable">
+                    Vou
+                    <div class = "transposedNoteName">Vou</div>
+                </div>
+                <div class = "martyria notSelectable">
+                    <div class = "fixed">b<span class = "variable">B</span></div>
+                </div>
+                <div class = "notSelectable"><hr><div class = "shortcutLetter">g</div></div>
+            </div>
+            <div id="Gha" class="noteKey">
+                <div class = "notSelectable">
+                    Gha
+                    <div class = "transposedNoteName">Gha</div>
+                </div>
+                <div class = "martyria notSelectable">
+                    <div class = "fixed">n<span class = "variable">N</span></div>
+                </div>
+                <div class = "notSelectable"><hr><div class = "shortcutLetter">h</div></div>
+            </div>
+            <div id="Dhi" class="noteKey">
+                <div class = "notSelectable">
+                    Dhi
+                    <div class = "transposedNoteName">Dhi</div>
+                </div>
+                <div class = "martyria notSelectable">
+                    <div class = "fixed">m<span class = "variable">&#60;C</span></div>
+                </div>
+                <div class = "notSelectable"><hr><div class = "shortcutLetter">j</div></div>
+            </div>
+            <div id="Ke" class="noteKey">
+                <div class = "notSelectable">
+                    Ke
+                    <div class = "transposedNoteName">Ke</div>
+                </div>
+                <div class = "martyria notSelectable">
+                    <div class = "fixed">,<span class = "variable">&#60;V</span></div>
+                </div>
+                <div class = "notSelectable"><hr><div class = "shortcutLetter">k</div></div>
+            </div>
+            <div id= "Zo'" class="noteKey">
+                <div class = "notSelectable">
+                    Zo'
+                    <div class = "transposedNoteName">Zo</div>
+                </div>
+                <div class = "martyria notSelectable">
+                    <div class = "fixed highOctave">.<span class = "variable">B</span></div>
+                </div>
+                <div class = "notSelectable"><hr><div class = "shortcutLetter">l</div></div>
+            </div>
+            <div id="Ni'" class="noteKey">
+                <div class = "notSelectable">
+                    Ni'
+                    <div class = "transposedNoteName">Ni</div>
+                </div>
+                <div class = "martyria notSelectable">
+                    <div class = "fixed highOctave">c<span class = "variable">N</span></div>
+                </div>
+                <div class = "notSelectable"><hr><div class = "shortcutLetter">;</div></div>
+            </div>
+            <div id="Pa'" class="noteKey">
+                <div class = "notSelectable">
+                    Pa'
+                    <div class = "transposedNoteName">Pa</div>
+                </div>
+                <div class = "martyria notSelectable">
+                    <div class = "fixed highOctave">v<span class = "variable">V</span></div>
+                </div>
+                <div class = "notSelectable"><hr><div class = "shortcutLetter">'</div></div>
+            </div>
+            <div id="Vou'" class="noteKey">
+                <div class = "notSelectable">
+                    Vou'
+                    <div class = "transposedNoteName">Vou</div>
+                </div>
+                <div class = "martyria notSelectable">
+                    <div class = "fixed highOctave">b<span class = "variable">B</span></div>
+                </div>
+                <div class = "notSelectable"><hr><div class = "shortcutLetter">o</div></div>
+            </div>
+            <div id="Gha'" class="noteKey">
+                <div class = "notSelectable">
+                    Gha'
+                    <div class = "transposedNoteName">Gha</div>
+                </div>
+                <div class = "martyria notSelectable">
+                    <div class = "fixed highOctave">n<span class = "variable">N</span></div>
+                </div>
+                <div class = "notSelectable"><hr><div class = "shortcutLetter">p</div></div>
+            </div>
+            <div id="Dhi'" class="noteKey">
+                <div class = "notSelectable">
+                    Dhi'
+                    <div class = "transposedNoteName">Dhi</div>
+                </div>
+                <div class = "martyria notSelectable">
+                    <div class = "fixed highOctave">m<span class = "variable">&#60;C</span></div>
+                </div>
+                <div class = "notSelectable"><hr><div class = "shortcutLetter">[</div></div>
+            </div>
+            <div id="Ke'" class="noteKey">
+                <div class = "notSelectable">
+                    Ke'
+                    <div class = "transposedNoteName">Ke</div>
+                </div>
+                <div class = "martyria notSelectable">
+                    <div class = "fixed highOctave">,<span class = "variable">&#60;V</span></div>
+                </div>
+                <div class = "notSelectable"><hr><div class = "shortcutLetter">]</div></div>
+            </div>
+        </div>
+        <div class="grid-item tunePlusMinus">
+            <div class = "plusMinus">-</div>
+            <div class = "plusMinus">+</div>
+            <div class = "plusMinus">-</div>
+            <div class = "plusMinus">+</div>
+            <div class = "plusMinus">-</div>
+            <div class = "plusMinus">+</div>
+            <div class = "plusMinus">-</div>
+            <div class = "plusMinus">+</div>
+            <div class = "plusMinus">-</div>
+            <div class = "plusMinus">+</div>
+            <div class = "plusMinus">-</div>
+            <div class = "plusMinus">+</div>
+            <div class = "plusMinus">-</div>
+            <div class = "plusMinus">+</div>
+            <div class = "plusMinus">-</div>
+            <div class = "plusMinus">+</div>
+            <div class = "plusMinus">-</div>
+            <div class = "plusMinus">+</div>
+            <div class = "plusMinus">-</div>
+            <div class = "plusMinus">+</div>
+            <div class = "plusMinus">-</div>
+            <div class = "plusMinus">+</div>
+            <div class = "plusMinus">-</div>
+            <div class = "plusMinus">+</div>
+            <div class = "plusMinus">-</div>
+            <div class = "plusMinus">+</div>
+            <div class = "plusMinus">-</div>
+            <div class = "plusMinus">+</div>
+            <div class = "plusMinus">-</div>
+            <div class = "plusMinus">+</div>
+            <div class = "plusMinus">-</div>
+            <div class = "plusMinus">+</div>
+            <div class = "plusMinus">-</div>
+            <div class = "plusMinus">+</div>
+        </div>
+    </div>
+    <div class = "fthoras">
+        <img class = "fthora" style="filter:invert(100%)" src = "images/Diatonic_Ni.png" alt="diatonic Ni" title="Diatonic Ni" width="70" height="70">
+        <img class = "fthora" src = "images/Diatonic_Pa.png" alt="diatonic Pa" title="Diatonic Pa" width="70" height="70">
+        <img class = "fthora" src = "images/Diatonic_Vou.png" alt="diatonic Vou" title="Diatonic Vou" width="70" height="70">
+        <img class = "fthora" src = "images/Diatonic_Gha.png" alt="diatonic Gha" title="Diatonic Gha" width="70" height="70">
+        <img class = "fthora" src = "images/Diatonic_Dhi.png" alt="diatonic Dhi" title="Diatonic Dhi" width="70" height="70">
+        <img class = "fthora" src = "images/Diatonic_Ke.png" alt="diatonic Ke" title="Diatonic Ke" width="70" height="70">
+        <img class = "fthora" src = "images/Diatonic_Zo1.png" alt="diatonic Zo" title="Diatonic Zo'" width="70" height="70">
+        <img class = "fthora" src = "images/Diatonic_Ni1.png" alt="diatonic Ni'" title="Diatonic Ni'" width="70" height="70">
+        <img class = "fthora" src = "images/Hard Chromatic_Pa.png" alt="Hard Chromatic Pa" title="Hard Chromatic Pa" width="70" height="70">
+        <img class = "fthora" src = "images/Hard Chromatic_Dhi.png" alt="Hard Chromatic Dhi" title="Hard Chromatic Dhi" width="70" height="70">
+        <img class = "fthora" src = "images/Soft Chromatic_Dhi.png" alt="Soft Chromatic Dhi" title="Soft Chromatic Dhi" width="70" height="70">
+        <img class = "fthora" src = "images/Soft Chromatic_Ni1.png" alt="Soft Chromatic Ni" title="Soft Chromatic Ni" width="70" height="70">
+        <img class = "fthora" src = "images/Special_Zo1.png" alt="Special Zo'" title="Special Zo'" width="70" height="70">
+        <img class = "fthora" src = "images/Kliton_Dhi.png" alt="Kliton Dhi" title="Kliton Dhi" width="70" height="70">
+        <img class = "fthora" src = "images/Spathi_Ke.png" alt="Spathi Ke" title="Spathi Ke" width="70" height="70">
+        <img class = "fthora" src = "images/Zygos_Dhi.png" alt="Zygos Dhi" title="Zygos Dhi" width="70" height="70">
+        <img class = "fthora" src = "images/Enharmonic_Gha.png" alt="Enharmonic Gha" title="Enharmonic Gha" width="70" height="70">
+        <img class = "fthora" src = "images/Enharmonic_Gha2.png" alt="Enharmonic Gha" title="Enharmonic Gha" width="70" height="70">
+        <img class = "fthora" src = "images/Enharmonic_Zo.png" alt="Enharmonic Zo" title="Enharmonic Zo" width="70" height="70">  
+    </div>
+    <fieldset class = "presetSettings">
+        <legend>Preset Modes</legend>
+        <button class = "presetBtn" type="button">Mode 1</button>
+        <button class = "presetBtn" type="button">Mode 2</button>
+        <button class = "presetBtn" type="button">Mode 3</button>
+        <button class = "presetBtn" type="button">Mode 4</button>
+        <button class = "presetBtn" type="button">Mode 5</button>
+        <button class = "presetBtn" type="button">Mode 6</button>
+        <button class = "presetBtn" type="button">Mode 7</button>
+        <button class = "presetBtn" type="button">Mode 8</button>
+    </fieldset>
+</body>
+</html>

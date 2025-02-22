@@ -1,0 +1,308 @@
+@import url("fonts.css");
+
+* {box-sizing: border-box;}
+
+html {font-size: 1vw;}
+
+.notSelectable {
+    pointer-events: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/*hidden class is used to hide martyrias on deactivated note*/
+.hidden {visibility: hidden;}
+
+body {
+    margin: 5px;
+    height: 100%;
+    background-image: linear-gradient(rgba(150, 0, 0, 0.055), rgb(150, 0, 0));
+    color: rgb(131, 41, 41);
+}
+
+#titleWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin: 1.5vh 0 1.5vh 0;
+}
+.mainTitle {
+    font-size: 2.5rem;
+}
+
+/**************************************/
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin-top: 1vh;
+}
+fieldset {
+    width: 15rem;
+    font-size:1rem;
+}
+.show {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size:1.2rem;
+}
+.spacer {
+    flex-grow: 1;
+}
+.alterationImage {
+    max-width: 80px;
+    max-height: 80px;
+
+    width: 5rem;
+    height: 5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0.3rem 0.3rem 0.3rem rgba(131, 41, 41, 0.493);
+    align-self: center;
+    margin: 0.5rem;
+}
+.used {
+    box-shadow: none;
+    filter: invert(100%);
+}
+.wrapper {
+    align-self: flex-end;
+    margin-left: 1rem;
+}
+#transposeInput {
+    background-color: transparent;
+    border: 1px rgb(131, 41, 41) solid;
+    width: 3em;
+    margin: 0.1rem 0 0.5rem 0;
+    font-size: 2rem;
+    text-align:center;
+    color: rgb(131, 41, 41);
+    border-radius: 0.5em;
+}
+#transposeInput:hover {
+    background-color: whitesmoke;
+}
+#transposeInput:invalid {
+    color: red;
+}
+#resetBtn:hover{
+    cursor: pointer;
+}
+#resetBtn {
+    background-color: rgb(131, 41, 41);
+    color: whitesmoke;
+    margin: 0 3rem 0.5rem 3rem;
+    font-size: 1rem; 
+    padding: 1em; 
+    border-radius: 0.5em; 
+    border: none;
+    font-family: Georgia, serif;
+    align-self: flex-end;
+}
+
+/*************************/
+.main-section {
+    display: grid;
+    margin-top: 1.5rem;
+    grid-template-columns: 100%;
+}
+
+/**********************/
+.intervals {
+    display: flex;
+}
+.interval {
+    min-width: 0;
+    border: 1px rgb(131, 41, 41) solid;
+    color: rgb(131, 41, 41);
+    margin: 0.3rem;
+    font-size: 1.25rem;
+    height: 1.8em;
+
+    flex-grow: 1;
+    flex-basis: 0;
+            
+    text-align:center;
+    background-color: transparent;
+    border-radius: 0.5em;
+}
+.interval:hover {
+    background-color: whitesmoke;
+}
+.interval:invalid{
+    background-color: rgb(253, 45, 45);
+}
+.interval-filler {
+    visibility: hidden;
+    flex-grow: 0.5;
+    flex-basis: 0;
+    margin: 0px;
+}
+
+/****************************/
+.playKeys {
+    display: flex;
+    font-size: 1rem;
+    margin-top: 0.1rem;
+}
+.noteKey {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+    -webkit-user-select: none;
+    user-select: none;
+    justify-content: space-between;
+
+    height: 12em;
+    border: 1.5px rgb(212, 206, 206) solid;
+    color: whitesmoke;
+    background-color: rgb(131, 41, 41);
+    
+    flex-grow: 1;
+    flex-basis: 0;
+
+    text-align: center;
+    padding-top: 2em;
+    font-size: 1.4em;
+    border-radius: 0.5em;
+}
+span.underscore {
+    display: inline;
+    pointer-events: none;
+    font-size: 0.6em;
+}
+.noteKeyDisabled {
+    background-color: #555;
+    color: #222;
+}
+.noteKeyPlayed {
+    /*background-color: #999;*/
+    background-color: rgba(131, 41, 41, 0.658);
+}
+.baseNote {
+    color: rgb(192, 165, 93);
+}
+
+/********************************/
+.transposedNoteName {
+    font-size: 0.6em;
+    padding-top: 0.6em;
+    margin-bottom: -1.5em;
+}
+.transposedNoteName::before, .transposedNoteName::after {
+    content: "*";
+}
+
+/*********************************/
+.martyria {
+    align-self: flex-start;
+    font-family: 'EZ Psaltica';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2em;
+    padding-left: 25%;
+    margin-bottom: -0.5em;
+}
+.specialMartyria {
+    font-family: 'EZ Fthora';
+}
+.lowOctave {
+    margin-bottom: -0.8em;     /*negative margin makes items below current item closer */
+}
+/*below is used for proper alignment of martyria due to the EZ psaltica special properties */
+.lowOctave::before {
+    font-family: 'EZ Psaltica';
+    content: "n";
+    visibility: hidden;
+}
+.highOctave::after {
+    content: '/';
+}
+
+/*********************************/
+.noteKey hr {
+    pointer-events: none;
+    color: rgb(212, 206, 206);
+    width: 80%;
+    margin-bottom: 0;
+}
+.shortcutLetter {
+    font-size: 0.8em;
+    pointer-events: none;
+    padding-bottom: 0.2em;
+}
+
+/**************************/
+.tunePlusMinus {
+    display: flex;
+}
+.plusMinus {
+    min-width: 0;
+    height: 1.5em;
+    line-height: 1.5em;
+    text-align: center;
+    vertical-align: middle;
+    background-color: transparent;
+    font-size: 1rem;
+    border: none;
+    border: 1px rgb(104, 30, 30) solid;
+    border-radius: 0.5rem;
+    color: rgb(80, 22, 22);
+    margin: 0.3rem;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.plusMinus:hover {
+    background-color: whitesmoke;
+    cursor: pointer;
+}
+/**************************/
+.fthoras {
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: auto;
+    margin-top: 4vmin;
+}    
+img {
+    max-width: 70px;
+    max-height: 70px;
+
+    width: 5rem;
+    height: 5rem;
+}
+img:hover {
+    cursor: pointer;
+}
+
+/*********************************/
+.presetSettings {
+    display:flex;
+    margin: auto;
+    margin-top: 4vmin;
+    margin-bottom: 4vmin;
+    border:1px solid #ddd;
+    justify-content:space-evenly;
+    align-items: center;
+    width: 40%;
+    padding: 0.5rem;
+    color:white;
+}    
+.presetBtn:hover{
+    cursor: pointer;
+}
+.presetBtn {
+    color:black;
+    font-size: 1rem; 
+    line-height: 1em; 
+    padding: 0.5em; 
+    border-radius: 0.5em; 
+    border: none;
+    font-family: Georgia, serif;
+}
+.presetBtn:active {
+background: black; 
+color: white;
+}
+
