@@ -151,8 +151,7 @@ function main () {
 		//touch start: play note, set base note if ctrl pressed
 		//touch stop: stop note
 		noteKeyCollection[i].addEventListener('touchstart',e => {
-			e.preventDefault
-			//console.log("Start")
+			e.preventDefault()
 			const keyIndex = getIndexInsideParent(e.target)
 			e.target.classList.add('noteKeyPlayed')
 			if (e.ctrlKey) {
@@ -161,9 +160,9 @@ function main () {
 			}
 			if (!e.target.classList.contains('noteKeyDisabled')) playNote(keyIndex,e)
 		})
+	/*
 		noteKeyCollection[i].addEventListener('touchmove',e => {
 			e.preventDefault
-			//console.log("Move")
 			const keyIndex = getIndexInsideParent(e.target)
 			document.querySelector('#ctrlKey').classList.remove('used')
 			if (keyIndex == -1) return
@@ -172,10 +171,9 @@ function main () {
 				if (!noteKeyCollection[keyIndex].classList.contains('noteKeyDisabled')) stopNote(keyIndex)
 			}
 		})
-
+	*/
 		noteKeyCollection[i].addEventListener('touchend',e => {
-			e.preventDefault
-			//console.log("End")
+			e.preventDefault()
 			const keyIndex = getIndexInsideParent(e.target)
 			document.querySelector('#ctrlKey').classList.remove('used')
 			document.querySelector('#shiftKey').classList.remove('used')
@@ -284,7 +282,7 @@ function stopNote (noteIndex) {
 	//so it necessary to first set the gain with an automation method before using the ramping function
 	//----------
 	gainCollection[noteIndex].gain.value = 0.5
-	gainCollection[noteIndex].gain.linearRampToValueAtTime(0.00001, audioCtx.currentTime + timeInSeconds)
+	gainCollection[noteIndex].gain.linearRampToValueAtTime(0, audioCtx.currentTime + timeInSeconds)
 
 	timeoutID = setTimeout (() => {
 			oscillatorsCollection[noteIndex].stop() 
