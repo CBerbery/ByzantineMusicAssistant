@@ -111,7 +111,7 @@ function main () {
 	}
 
 	//add 2 event listeners to notes
-	//mouse down: play noteset base note if set time exceeded
+	//mouse down: play noteset base note if ctrl pressed
 	//mouse up: stop note
 	for (i=0;i<noteKeyCollection.length;i++) {
 	
@@ -136,6 +136,46 @@ function main () {
 		})
 
 		noteKeyCollection[i].addEventListener('mouseup',e => {
+			const keyIndex = getIndexInsideParent(e.target)
+			document.querySelector('#ctrlKey').classList.remove('used')
+			document.querySelector('#shiftKey').classList.remove('used')
+			document.querySelector('#altKey').classList.remove('used')
+			if (keyIndex == -1) return
+			if (noteKeyCollection[keyIndex].classList.contains('noteKeyPlayed')) {
+				noteKeyCollection[keyIndex].classList.remove('noteKeyPlayed')
+				if (!noteKeyCollection[keyIndex].classList.contains('noteKeyDisabled')) stopNote(keyIndex)
+			}
+		})
+
+		//add touch event listeners to notes
+		//touch start: play note, set base note if ctrl pressed
+		//touch stop: stop note
+		noteKeyCollection[i].addEventListener('touchstart',e => {
+			e.preventDefault
+			//console.log("Start")
+			const keyIndex = getIndexInsideParent(e.target)
+			e.target.classList.add('noteKeyPlayed')
+			if (e.ctrlKey) {
+				document.querySelector('#ctrlKey').classList.add('used')
+				if (numberOfKeysAtTheSameTime = 1) setBaseNote(keyIndex)
+			}
+			if (!e.target.classList.contains('noteKeyDisabled')) playNote(keyIndex,e)
+		})
+		noteKeyCollection[i].addEventListener('touchmove',e => {
+			e.preventDefault
+			//console.log("Move")
+			const keyIndex = getIndexInsideParent(e.target)
+			document.querySelector('#ctrlKey').classList.remove('used')
+			if (keyIndex == -1) return
+			if (noteKeyCollection[keyIndex].classList.contains('noteKeyPlayed')) {
+				noteKeyCollection[keyIndex].classList.remove('noteKeyPlayed')
+				if (!noteKeyCollection[keyIndex].classList.contains('noteKeyDisabled')) stopNote(keyIndex)
+			}
+		})
+
+		noteKeyCollection[i].addEventListener('touchend',e => {
+			e.preventDefault
+			//console.log("End")
 			const keyIndex = getIndexInsideParent(e.target)
 			document.querySelector('#ctrlKey').classList.remove('used')
 			document.querySelector('#shiftKey').classList.remove('used')
