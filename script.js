@@ -342,7 +342,6 @@ function stopNote (noteIndex) {
 
 function activatePreset (event) {
 	//preset buttons combine fthoras and base notes in them
-	event.preventDefault()
 	var index = getIndexInsideParent(event.target)
 	var genre, fthora, baseNote, baseIndex
 
@@ -440,22 +439,20 @@ function gain(dryGain,wetGain,totalGain) {
 }
 
 
-function setFthora(event) {
-	event.preventDefault()
+function setFthora(param) {
 	let currentFthora
 	// reset previous fthora
 	fthorasCollection[fthoraIndex].style.filter = "invert(0%)"
 	
-	/*
 	//handle param
 	if (typeof param === 'undefined') { //i.e. no parameter
 		currentFthora = fthorasCollection[0]
 	} else if (typeof param === 'object') { //i.e. event parameter
+		param.preventDefault()
 		currentFthora = param.target
 	} else if (typeof(param) === 'number') {  //i.e. number from other function
 		currentFthora = fthorasCollection[param]
 	}
-	*/
 
 	const imageSrc = decodeURI(currentFthora.src)  //decodeURI reads space as " " not as %20
 	const imageName = imageSrc.slice(imageSrc.lastIndexOf("/")+1,imageSrc.lastIndexOf("."))
