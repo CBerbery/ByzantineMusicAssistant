@@ -121,6 +121,7 @@ function main () {
 	for (i=0;i<noteKeyCollection.length;i++) {
 	
 		noteKeyCollection[i].addEventListener('mousedown',e => {
+			e.preventDefault()
 			const keyIndex = getIndexInsideParent(e.target)
 			e.target.classList.add('noteKeyPlayed')
 			if (e.ctrlKey || ctrlKeyPressed) {
@@ -131,6 +132,7 @@ function main () {
 		})
 
 		noteKeyCollection[i].addEventListener('mouseleave',e => {
+			e.preventDefault()
 			const keyIndex = getIndexInsideParent(e.target)
 			document.querySelector('#ctrlKey').classList.remove('used')
 			if (keyIndex == -1) return
@@ -141,6 +143,7 @@ function main () {
 		})
 
 		noteKeyCollection[i].addEventListener('mouseup',e => {
+			e.preventDefault()
 			const keyIndex = getIndexInsideParent(e.target)
 			document.querySelector('#ctrlKey').classList.remove('used')
 			document.querySelector('#shiftKey').classList.remove('used')
@@ -284,6 +287,7 @@ function main () {
 
 /////////////////////////////////////////////////////
 function noteAlterationTouchStart (event) {
+	event.preventDefault()
 	var index = getIndexInsideParent(event.target)
 	switch (index) {
 		case 3: //shift key
@@ -299,6 +303,7 @@ function noteAlterationTouchStart (event) {
 }
 
 function noteAlterationTouchEnd (event) {
+	event.preventDefault()
 	var index = getIndexInsideParent(event.target)
 	switch (index) {
 		case 3: //shift key
@@ -337,6 +342,7 @@ function stopNote (noteIndex) {
 
 function activatePreset (event) {
 	//preset buttons combine fthoras and base notes in them
+	event.preventDefault()
 	var index = getIndexInsideParent(event.target)
 	var genre, fthora, baseNote, baseIndex
 
@@ -434,12 +440,13 @@ function gain(dryGain,wetGain,totalGain) {
 }
 
 
-function setFthora(param) {
+function setFthora(event) {
+	event.preventDefault()
 	let currentFthora
 	// reset previous fthora
 	fthorasCollection[fthoraIndex].style.filter = "invert(0%)"
 	
-	
+	/*
 	//handle param
 	if (typeof param === 'undefined') { //i.e. no parameter
 		currentFthora = fthorasCollection[0]
@@ -448,6 +455,7 @@ function setFthora(param) {
 	} else if (typeof(param) === 'number') {  //i.e. number from other function
 		currentFthora = fthorasCollection[param]
 	}
+	*/
 
 	const imageSrc = decodeURI(currentFthora.src)  //decodeURI reads space as " " not as %20
 	const imageName = imageSrc.slice(imageSrc.lastIndexOf("/")+1,imageSrc.lastIndexOf("."))
