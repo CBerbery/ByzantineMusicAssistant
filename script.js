@@ -11,6 +11,7 @@ let plusMinusCollection
 let fthorasCollection
 let presetBtnsCollection
 let radioFineTuneBase
+let alterationImageCollection
 
 const KEYB_KEYS 	  = ['z', 'x', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'o', 'p', '[', ']']
 const KEYB_KEYS_SHIFT = ['Z', 'X', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"', 'O', 'P', '{', '}']
@@ -217,7 +218,7 @@ function main () {
 				noteKeyCollection[keyIndex].classList.add('noteKeyPlayed')
 			}
 			
-			if (e.ctrlKey) {
+			if (e.ctrlKey || ctrlKeyPressed) {
 				document.querySelector('#ctrlKey').classList.add('used')
 				setBaseNote(keyIndex)
 			}
@@ -273,9 +274,11 @@ function main () {
 	//add touch start event listener to alteration images
 	for (i=0;i<alterationImageCollection.length;i++) {
 		alterationImageCollection[i].addEventListener('touchstart',noteAlterationTouchStart)
+	}
 	//add touch end event listener to alteration images
 	for (i=0;i<alterationImageCollection.length;i++) {
 		alterationImageCollection[i].addEventListener('touchend',noteAlterationTouchEnd)
+	}
 }
 
 
@@ -283,14 +286,14 @@ function main () {
 function noteAlterationTouchStart (event) {
 	var index = getIndexInsideParent(event.target)
 	switch (index) {
-		case 1: //shift key
-		shiftKeyPressed == true
+		case 3: //shift key
+		shiftKeyPressed = true
 		break
-		case 2: //alt key
-		altKeypressed == true
+		case 4: //alt key
+		altKeyPressed = true
 		break
-		case 3: //ctrl key
-		ctrlKeyPressed == true
+		case 5: //ctrl key
+		ctrlKeyPressed = true
 		break
 	}
 }
@@ -298,14 +301,14 @@ function noteAlterationTouchStart (event) {
 function noteAlterationTouchEnd (event) {
 	var index = getIndexInsideParent(event.target)
 	switch (index) {
-		case 1: //shift key
-		shiftKeyPressed == false
+		case 3: //shift key
+		shiftKeyPressed = false
 		break
-		case 2: //alt key
-		altKeypressed == false
+		case 4: //alt key
+		altKeyPressed = false
 		break
-		case 3: //ctrl key
-		ctrlKeyPressed == false
+		case 5: //ctrl key
+		ctrlKeyPressed = false
 		break
 	}
 }
