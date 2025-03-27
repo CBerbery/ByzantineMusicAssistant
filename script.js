@@ -69,6 +69,9 @@ var dry = audioCtx.createGain()
 var wet = audioCtx.createGain()
 var output = audioCtx.createGain()
 var hornTable
+let shiftKeyPressed = false
+let altKeyPressed = false
+let ctrlKeyPressed = false
 
 var timeoutID
 
@@ -99,6 +102,7 @@ function main () {
 	fthorasCollection = document.getElementsByClassName("fthora")
 	presetBtnsCollection = document.getElementsByClassName("presetBtn")
 	radioFineTuneBase = document.querySelectorAll('input[type=radio][name="fineTuneBase"]')
+	alterationImageCollection = document.getElementsByClassName("alterationImage")
 
 	// initialize
 	initialize()
@@ -118,7 +122,7 @@ function main () {
 		noteKeyCollection[i].addEventListener('mousedown',e => {
 			const keyIndex = getIndexInsideParent(e.target)
 			e.target.classList.add('noteKeyPlayed')
-			if (e.ctrlKey) {
+			if (e.ctrlKey || ctrlKeyPressed) {
 				document.querySelector('#ctrlKey').classList.add('used')
 				if (numberOfKeysAtTheSameTime = 1) setBaseNote(keyIndex)
 			}
@@ -154,7 +158,7 @@ function main () {
 			e.preventDefault()
 			const keyIndex = getIndexInsideParent(e.target)
 			e.target.classList.add('noteKeyPlayed')
-			if (e.ctrlKey) {
+			if (e.ctrlKey || ctrlKeyPressed) {
 				document.querySelector('#ctrlKey').classList.add('used')
 				if (numberOfKeysAtTheSameTime = 1) setBaseNote(keyIndex)
 			}
@@ -266,10 +270,46 @@ function main () {
 	for (i=0; i<presetBtnsCollection.length; i++) {
 		presetBtnsCollection[i].addEventListener('click',activatePreset)
 	}
+	//add touch start event listener to alteration images
+	for (i=0;i<alterationImageCollection.length;i++) {
+		alterationImageCollection[i].addEventListener('touchstart',noteAlterationTouchStart)
+	//add touch end event listener to alteration images
+	for (i=0;i<alterationImageCollection.length;i++) {
+		alterationImageCollection[i].addEventListener('touchend',noteAlterationTouchEnd)
 }
 
 
 /////////////////////////////////////////////////////
+function noteAlterationTouchStart (event) {
+	var index = getIndexInsideParent(event.target)
+	switch (index) {
+		case 1: //shift key
+		shiftKeyPressed == true
+		break
+		case 2: //alt key
+		altKeypressed == true
+		break
+		case 3: //ctrl key
+		ctrlKeyPressed == true
+		break
+	}
+}
+
+function noteAlterationTouchEnd (event) {
+	var index = getIndexInsideParent(event.target)
+	switch (index) {
+		case 1: //shift key
+		shiftKeyPressed == false
+		break
+		case 2: //alt key
+		altKeypressed == false
+		break
+		case 3: //ctrl key
+		ctrlKeyPressed == false
+		break
+	}
+}
+
 function stopNote (noteIndex) {
 	var timeInMilliseconds = 8
 	var timeInSeconds = timeInMilliseconds/1000
@@ -282,7 +322,7 @@ function stopNote (noteIndex) {
 	//so it necessary to first set the gain with an automation method before using the ramping function
 	//----------
 	gainCollection[noteIndex].gain.value = 0.5
-	gainCollection[noteIndex].gain.linearRampToValueAtTime(0, audioCtx.currentTime + timeInSeconds)
+	gainCollection[noteIndex].gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + timeInSeconds)
 
 	timeoutID = setTimeout (() => {
 			oscillatorsCollection[noteIndex].stop() 
@@ -805,7 +845,7 @@ function playNote (noteIndex, noteEvent) {
 	//when pressed with another key then we have a combination if .shiftKey, .ctrlKey and .altKey will work
 
 	var interval
-	if (noteEvent.shiftKey) {
+	if (noteEvent.shiftKey || shiftKeyPressed) {
 		document.querySelector('#shiftKey').classList.add('used')
 		if (noteIndex > 0) {
 			interval = getSuitableInterval (actualFrequencies[noteIndex-1],actualFrequencies[noteIndex])
@@ -815,7 +855,7 @@ function playNote (noteIndex, noteEvent) {
 			if (interval != -1) {note = actualFrequencies[noteIndex+1] * 2 ** (interval/72)} //set note equal to adjacent lowered 12 comas
 		}
 	}
-	if (noteEvent.altKey) {
+	if (noteEvent.altKey || altKeyPressed) {
 		document.querySelector('#altKey').classList.add('used')
 		if (noteIndex < actualFrequencies.length-1) {
 			interval = getSuitableInterval (actualFrequencies[noteIndex],actualFrequencies[noteIndex+1])
