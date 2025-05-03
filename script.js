@@ -639,10 +639,14 @@ function setTransposedNoteNames () {
 
 function setFineTuneOption () {
 	//set Fine Tune Option
+	//Natural sets the base note frequency to that of a white key of a piano
+	//Flat lowers the base note frequency 6 comas relative to the white key of a piano
+	//Diatonic lowers the base note frequency 2 comas relative to the white key of a piano
 	///////////////////////
 	var genre = document.getElementById("scaleSpan").innerText
 	var fthoraName = document.querySelector("#fthoraSpan").innerText
-	fthoraName = fthoraName.replace("2","")
+	if (fthoraName.indexOf("2") != -1) fthoraName = fthoraName.replace("2","")
+	if (fthoraName.indexOf("'") != -1) fthoraName = fthoraName.replace("'","")
 	
 	var baseNoteName = document.querySelector("#baseNoteSpan").innerText
 	if (baseNoteName.indexOf("'") != -1) baseNoteName = baseNoteName.replace("'","")
